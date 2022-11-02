@@ -1,0 +1,28 @@
+@use "../index.scss" as *;
+
+.app {
+  min-height: 100vh;
+  position: relative;
+  display: flow-root;
+
+  &::before {
+    content: "";
+    position: absolute;
+    background-color: $primaryColor;
+    height: 40%;
+    width: 100%;
+    z-index: -1;
+  }
+}
+
+.mainWrapper {
+  max-width: min(40rem, 90%);
+  margin: 0 auto;
+}
+
+.app__mainTitle {
+  text-align: center;
+  color: #fff;
+  margin: 2rem 0;
+  text-transform: uppercase;
+}

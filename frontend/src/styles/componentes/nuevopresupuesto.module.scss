@@ -1,0 +1,47 @@
+@use "../index.scss" as *;
+
+.nuevo {
+  padding: 3rem 4rem;
+  background: #fff;
+  border-radius: 5px;
+  margin: 0 auto;
+  box-shadow: 1px 1px 3px 1px rgba(154, 153, 153, 0.298);
+}
+
+.nuevo__title {
+  text-align: center;
+  font-weight: 500;
+  color: $primaryColor;
+}
+
+.nuevo__form {
+  display: flex;
+  margin: 2rem 0;
+  gap: 1rem;
+  flex-direction: column;
+
+  input {
+    padding: 0.4rem 0;
+    border: none;
+    text-align: center;
+    font-size: 1.2rem;
+    font-family: inherit;
+    font-weight: 700;
+    background-color: $slateBackground;
+  }
+
+  button {
+    padding: 0.4rem 0;
+    color: #fff;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    font-weight: 800;
+    font-family: inherit;
+    background-color: $primaryColor;
+    transition: 0.4s all;
+    &:hover {
+      background-color: $primaryColorDarker;
+    }
+  }
+}
