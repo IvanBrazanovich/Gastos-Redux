@@ -1,11 +1,12 @@
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { transformCurrency } from "../helpers/helper";
 import styles from "../styles/componentes/control.module.scss";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import { resetearApp, savePresupuesto } from "../app/slices/gastosSlice";
 
 const ControlPresupuesto = () => {
   const [gastado, setGastado] = useState(0);
@@ -13,15 +14,16 @@ const ControlPresupuesto = () => {
   //Redux
   const presupuesto = useSelector((state) => state.gastos.presupuesto) || 0;
   const gastos = useSelector((state) => state.gastos.gastos);
+
+  //Redux
+  const dispatch = useDispatch();
+
   useEffect(() => {
     const calcularGastos = () => {
-      const gastadoCal = gastos?.reduce(
-        (total, item) => item.cantidad + total,
-        0
-      );
+      const gastadoCal =
+        gastos?.reduce((total, item) => item.cantidad + total, 0) || 0;
       const per = (gastadoCal * 100) / presupuesto;
       setPercentage(per);
-      console.log(per);
       setGastado(gastadoCal);
     };
 
@@ -44,7 +46,14 @@ const ControlPresupuesto = () => {
       </div>
 
       <div className={styles.control__control}>
-        <button>Resetear App</button>
+        <button
+          onClick={() => {
+            dispatch(resetearApp());
+            dispatch(savePresupuesto(0));
+          }}
+        >
+          Resetear App
+        </button>
         <p>
           <span>Presupuesto: </span>
           {transformCurrency(presupuesto)}

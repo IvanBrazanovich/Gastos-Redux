@@ -1,4 +1,5 @@
 import React from "react";
+import { memo } from "react";
 import styles from "../styles/componentes/listadogasto.module.scss";
 import casaImg from "../img/icono_casa.svg";
 import comidaImg from "../img/icono_comida.svg";
@@ -12,6 +13,8 @@ import { useDispatch } from "react-redux";
 import { transformDate } from "../helpers/helper";
 
 const Gasto = ({ gasto }) => {
+  console.log("Se re-renderiza el gasto:", gasto.nombre);
+
   //Destructuring
   const { nombre, categoria, cantidad, id } = gasto;
 
@@ -67,4 +70,4 @@ const Gasto = ({ gasto }) => {
   );
 };
 
-export default Gasto;
+export default memo(Gasto);

@@ -3,10 +3,10 @@ import { useState } from "react";
 import styles from "../styles/componentes/modal.module.scss";
 import Mensaje from "./Mensaje";
 import {
-  addGasto,
   changeModal,
   editGasto,
-  setEdit,
+  postGasto,
+  setEditado,
 } from "../app/slices/gastosSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -47,10 +47,10 @@ const Modal = () => {
 
     //See if editing mode
     if (editObj?.id) {
-      dispatch(setEdit({ nombre, cantidad, categoria, id: editObj.id }));
+      dispatch(setEditado({ nombre, cantidad, categoria, id: editObj.id }));
       dispatch(editGasto({}));
     } else {
-      dispatch(addGasto({ nombre, cantidad, categoria, id: Date.now() }));
+      dispatch(postGasto({ nombre, cantidad, categoria }));
     }
 
     dispatch(changeModal(false));
