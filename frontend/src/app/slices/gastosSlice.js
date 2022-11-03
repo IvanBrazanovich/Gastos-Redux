@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   presupuesto: 0,
-  showModal: true,
+  showModal: false,
   gastos: [],
 };
 
@@ -14,9 +14,15 @@ const gastosSlice = createSlice({
       state.presupuesto = action.payload;
       console.log(state.presupuesto);
     },
+    changeModal: (state, action) => {
+      state.showModal = action.payload;
+    },
+    addGasto: (state, action) => {
+      state.gastos = [...state.gastos, action.payload];
+    },
   },
 });
 
-export const { savePresupuesto } = gastosSlice.actions;
+export const { savePresupuesto, changeModal, addGasto } = gastosSlice.actions;
 
 export default gastosSlice.reducer;

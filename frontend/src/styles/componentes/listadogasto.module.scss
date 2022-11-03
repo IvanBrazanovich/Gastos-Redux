@@ -37,4 +37,93 @@
 ********************************/
 .listado {
   margin: 2rem 0;
+
+  &__listadoWrapper {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem 0;
+  }
+}
+
+/****************************
+*   GASTOS
+********************************/
+.gasto {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 4px;
+  gap: 1rem;
+
+  box-shadow: 1px 1px 3px 1px rgba(155, 155, 155, 0.475);
+
+  @include mediaChange(sm) {
+    flex-direction: row;
+  }
+}
+
+.gasto__imgWrapper {
+  width: 8rem;
+}
+
+.infoWrapper {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+
+  &__categoria {
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    font-weight: 800;
+    color: $textLightColor;
+  }
+
+  &__nombre {
+    font-size: 1.1rem;
+    font-weight: 800;
+  }
+
+  &__fecha {
+    font-size: 0.9rem;
+
+    span {
+      font-weight: 700;
+    }
+  }
+
+  &__cantidad {
+    font-weight: 600;
+  }
+}
+
+.gasto__buttonWrapper {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  gap: 2rem;
+
+  @include mediaChange(sm) {
+    flex-direction: column;
+  }
+
+  button {
+    padding: 0.4rem 0;
+    width: max(100%, 7rem);
+    border-radius: 4px;
+    border: none;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-weight: 900;
+    color: #fff;
+
+    &[type="editar"] {
+      background-color: $primaryColor;
+    }
+
+    &[type="eliminar"] {
+      background-color: $errorColor;
+    }
+  }
 }

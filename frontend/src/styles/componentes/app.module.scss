@@ -16,7 +16,7 @@
 }
 
 .mainWrapper {
-  max-width: min(40rem, 90%);
+  max-width: min(45rem, 90%);
   margin: 0 auto;
 }
 
@@ -25,4 +25,14 @@
   color: #fff;
   margin: 2rem 0;
   text-transform: uppercase;
+}
+
+.add__nuevoGasto {
+  position: fixed;
+  width: 2.5rem;
+  background-color: rgba(0 0 0 / 0);
+  right: 2rem;
+  bottom: 2rem;
+  cursor: pointer;
+  border: 1px;
 }
