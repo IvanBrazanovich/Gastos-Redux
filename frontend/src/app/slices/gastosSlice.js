@@ -4,6 +4,8 @@ const initialState = {
   presupuesto: 0,
   showModal: false,
   gastos: [],
+  edit: {},
+  filter: "",
 };
 
 const gastosSlice = createSlice({
@@ -20,9 +22,33 @@ const gastosSlice = createSlice({
     addGasto: (state, action) => {
       state.gastos = [...state.gastos, action.payload];
     },
+    editGasto: (state, action) => {
+      state.edit = action.payload;
+    },
+    setEdit: (state, action) => {
+      state.gastos = state.gastos.map((item) =>
+        item.id === action.payload.id ? action.payload : item
+      );
+    },
+    deleteGasto: (state, action) => {
+      state.gastos = state.gastos.filter(
+        (item) => item.id !== action.payload.id
+      );
+    },
+    setFilter: (state, action) => {
+      state.filter = action.payload;
+    },
   },
 });
 
-export const { savePresupuesto, changeModal, addGasto } = gastosSlice.actions;
+export const {
+  setEdit,
+  editGasto,
+  deleteGasto,
+  savePresupuesto,
+  setFilter,
+  changeModal,
+  addGasto,
+} = gastosSlice.actions;
 
 export default gastosSlice.reducer;

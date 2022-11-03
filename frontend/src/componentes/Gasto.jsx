@@ -7,12 +7,16 @@ import ahorroImg from "../img/icono_ahorro.svg";
 import ocioImg from "../img/icono_ocio.svg";
 import saludImg from "../img/icono_salud.svg";
 import suscripcionesImg from "../img/icono_suscripciones.svg";
+import { editGasto, deleteGasto, changeModal } from "../app/slices/gastosSlice";
+import { useDispatch } from "react-redux";
 import { transformDate } from "../helpers/helper";
 
 const Gasto = ({ gasto }) => {
   //Destructuring
   const { nombre, categoria, cantidad, id } = gasto;
-  console.log(id);
+
+  //Redux
+  const dispatch = useDispatch();
 
   //Crear diccionario
   const diccionario = {
@@ -46,8 +50,18 @@ const Gasto = ({ gasto }) => {
       </div>
 
       <div className={styles.gasto__buttonWrapper}>
-        <button type="editar">Editar</button>
-        <button type="eliminar">Eliminar</button>
+        <button
+          onClick={(e) => {
+            dispatch(editGasto(gasto));
+            dispatch(changeModal(true));
+          }}
+          type="editar"
+        >
+          Editar
+        </button>
+        <button onClick={(e) => dispatch(deleteGasto(gasto))} type="eliminar">
+          Eliminar
+        </button>
       </div>
     </div>
   );

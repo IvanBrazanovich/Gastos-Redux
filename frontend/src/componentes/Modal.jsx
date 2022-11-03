@@ -2,8 +2,15 @@ import React from "react";
 import { useState } from "react";
 import styles from "../styles/componentes/modal.module.scss";
 import Mensaje from "./Mensaje";
-import { addGasto, changeModal } from "../app/slices/gastosSlice";
-import { useDispatch } from "react-redux";
+import {
+  addGasto,
+  changeModal,
+  editGasto,
+  setEdit,
+} from "../app/slices/gastosSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import cerrarImg from "../img/cerrar.svg";
 
 const Modal = () => {
   //STATES
@@ -12,8 +19,18 @@ const Modal = () => {
   const [categoria, setCategoria] = useState("");
   const [error, setError] = useState(false);
 
-  //Dispatch
+  //Redux
   const dispatch = useDispatch();
+  const editObj = useSelector((state) => state.gastos.edit);
+
+  //Check if editObj
+  useEffect(() => {
+    if (editObj?.id) {
+      setNombre(editObj.nombre);
+      setCantidad(editObj.cantidad);
+      setCategoria(editObj.categoria);
+    }
+  }, [editObj]);
 
   //Funciones
   const handleSubmit = (e) => {
@@ -28,12 +45,36 @@ const Modal = () => {
 
     setError(false);
 
+    //See if editing mode
+    if (editObj?.id) {
+      dispatch(setEdit({ nombre, cantidad, categoria, id: editObj.id }));
+      dispatch(editGasto({}));
+    } else {
+      dispatch(addGasto({ nombre, cantidad, categoria, id: Date.now() }));
+    }
+
     dispatch(changeModal(false));
-    dispatch(addGasto({ nombre, cantidad, categoria, id: Date.now() }));
+
+    //Clean input
+    setNombre("");
+    setCantidad(0);
+    setCategoria("");
   };
 
   return (
     <section className={styles.modal}>
+      <div className={styles.cerrar}>
+        <img
+          src={cerrarImg}
+          onClick={(e) => {
+            dispatch(changeModal(false));
+          }}
+          alt=""
+        />
+      </div>
+      <div>
+        <img src={cerrarImg} alt="" />
+      </div>
       <div className={styles.form__wrapper}>
         <h2>Nuevo Gasto</h2>
         <form onSubmit={handleSubmit}>
@@ -72,7 +113,10 @@ const Modal = () => {
             <option value="ahorro">Ahorro</option>
           </select>
 
-          <button type="submit">Añadir Gasto</button>
+          <button type="submit">
+            {" "}
+            {editObj?.id ? "Editar Gasto" : "Añadir Gasto"}{" "}
+          </button>
           {error ? (
             <Mensaje>
               Todos los campos son obligatorios y la cantidad debe ser mayor a 0
