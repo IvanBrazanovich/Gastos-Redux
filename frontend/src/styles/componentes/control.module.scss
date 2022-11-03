@@ -2,9 +2,10 @@
 
 .control {
   background-color: #fff;
-  padding: 2rem 3rem;
+  padding: 2rem;
   border-radius: 5px;
   display: flex;
+  gap: 3rem;
   flex-direction: column;
   box-shadow: 1px 1px 3px 1px rgba(177, 174, 174, 0.438);
 
@@ -18,6 +19,10 @@
   @include mediaChange(sm) {
     width: 50%;
   }
+
+  svg {
+    width: 80%;
+  }
 }
 
 .control__control {
@@ -27,6 +32,7 @@
   gap: 1rem;
 
   p {
+    font-weight: 600;
     span {
       font-weight: 800;
       color: $primaryColor;

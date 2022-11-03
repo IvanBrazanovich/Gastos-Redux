@@ -7,3 +7,12 @@ export const transformDate = (date) => {
     day: "2-digit",
   });
 };
+
+export const transformCurrency = (cantidad) => {
+  const formatter = new Intl.NumberFormat("es-AR", {
+    style: "currency",
+    currency: "ARS",
+  });
+
+  return formatter.format(cantidad);
+};
